@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Etch-A-Sketch</title>
+  <style>
+  .container {
+    display: inline-grid;
+  grid-template-columns: repeat(16, 1fr);
+  background-color: red;
+  padding: 10px;
+  }
+  .gridItem {
+  background-color: red;
+ border: 1px solid rgba(0, 0, 0, 0.8);
+ padding: 20px;
+ font-size: 10px;
+ text-align: center;
+}
+  </style>
+</head>
+<body>
+  <button id="gridReset">RESET</button><br>
+  <div class="container">
+  </div>
+
+  <script>
+const container = document.querySelector('div.container');
+
+
+function buildGrid() {
+  for (var i = 0; i < 256; i++) {
+    const gridItem = document.createElement('div');
+    gridItem.setAttribute('class', 'gridItem');
+  container.appendChild(gridItem);
+//for (var i=0; i<4; i++){
+  gridItem.addEventListener("mouseover", event => {
+gridItem.setAttribute('style', 'background: rgba(0,0,0,1)');
+      console.log("mouseover");})
+      var gridReset = document.querySelector('#gridReset');
+      gridReset.addEventListener('click', () => {
+        gridItem.setAttribute('style', 'background: red)');
+      });
+  //  }
+  }
+
+}
+buildGrid()
+
+
+
+  </script>
+</body>
+</html>
