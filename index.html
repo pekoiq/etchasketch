@@ -5,17 +5,17 @@
   <title>Etch-A-Sketch</title>
   <style>
   .container {
-    display: inline-grid;
+  display: inline-grid;
   grid-template-columns: repeat(16, 1fr);
+  height: 600px;
+  width: 600px;
   background-color: red;
-  padding: 10px;
+  padding: 10px
   }
   .gridItem {
   background-color: red;
  border: 1px solid rgba(0, 0, 0, 0.8);
- padding: 20px;
- font-size: 10px;
- text-align: center;
+ display: inline-block;
 }
   </style>
 </head>
@@ -25,29 +25,53 @@
   </div>
 
   <script>
+let columns = 16
+let newColumns
 const container = document.querySelector('div.container');
-
-
+gridReset.addEventListener('click', () => {
+newColumns = prompt("Please enter new grid size");
+buildCustomGrid()
+});
+//object.style.gridTemplateColumns="50px 50px 50px"
 function buildGrid() {
-  for (var i = 0; i < 256; i++) {
-    const gridItem = document.createElement('div');
-    gridItem.setAttribute('class', 'gridItem');
-  container.appendChild(gridItem);
-//for (var i=0; i<4; i++){
-  gridItem.addEventListener("mouseover", event => {
-gridItem.setAttribute('style', 'background: rgba(0,0,0,1)');
-      console.log("mouseover");})
-      var gridReset = document.querySelector('#gridReset');
-      gridReset.addEventListener('click', () => {
-        gridItem.setAttribute('style', 'background: red)');
-      });
-  //  }
+      for (var i = 0; i < (columns * columns); i++) {
+        const gridItem = document.createElement('div');
+        gridItem.setAttribute('class', 'gridItem');
+        container.appendChild(gridItem);
+
+        gridItem.addEventListener("mouseover", event => {
+          gridItem.setAttribute('style', 'background: rgba(0,0,0,1)');
+        })
+        var gridReset = document.querySelector('#gridReset');
+        gridReset.addEventListener('click', () => {
+          gridItem.setAttribute('style', 'background: red)');
+          container.removeChild(gridItem);
+          });
   }
-
 }
+function buildCustomGrid() {
+  container.style.gridTemplateColumns="repeat("+newColumns+", 1fr)";
+
+      for (var i = 0; i < (newColumns * newColumns); i++) {
+        const gridItem = document.createElement('div');
+        gridItem.setAttribute('class', 'gridItem');
+        container.appendChild(gridItem);
+
+        gridItem.addEventListener("mouseover", event => {
+          gridItem.setAttribute('style', 'background: rgba(0,0,0,1)');
+        })
+        var gridReset = document.querySelector('#gridReset');
+        gridReset.addEventListener('click', () => {
+          gridItem.setAttribute('style', 'background: red)')
+        container.removeChild(gridItem);
+          });
+  }
+}
+
+
+
+
 buildGrid()
-
-
 
   </script>
 </body>
